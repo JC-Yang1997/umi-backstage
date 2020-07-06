@@ -25,11 +25,6 @@ export default (props: any) => {
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
-
   return (
     <Form
       {...layout}
@@ -37,7 +32,6 @@ export default (props: any) => {
       name="basic"
       initialValues={{ remember: true }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
     >
       <Form.Item
         label="用户名"
