@@ -4,6 +4,13 @@ export default {
   nodeModulesTransform: {
     type: 'none',
   },
+  proxy: {
+    "/api": {
+      target: "https://pvp.qq.com",
+      changeOrigin: true,
+      pathRewrite: { "^/api": "" }
+    }
+  },
   dva: {},
   routes: [
     {
