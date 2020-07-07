@@ -4,6 +4,7 @@ export default {
   nodeModulesTransform: {
     type: 'none',
   },
+  dva: {},
   routes: [
     {
       path: '/layout',

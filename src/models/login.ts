@@ -1,35 +1,40 @@
-import { useState, useCallback } from 'react'
+import { Effect, Reducer } from 'umi'
 
-interface UserInfo {
+interface UserState {
   username: string | null,
   password: string | null
 }
 
-export default () => {
-  let userInfo: UserInfo = {
-    username: null,
-    password: null
-  }
-  const [user, setUser] = useState(userInfo)
-
-  const signin = useCallback((username, password) => {
-    if (username === 'yjc' && password === '123456') {
-      setUser({
-        username,
-        password
-      })
-      console.log('登录成功')
-    }
-  }, [])
-
-  const signout = useCallback(() => {
-    setUser(userInfo)
-    console.log('登出')
-  }, [])
-
-  return {
-    user,
-    signin,
-    signout
+interface UserModalType {
+  namespace: string,
+  state: UserState,
+  effects: {
+    query: Effect
+  },
+  reducers: {
+    save: Reducer<UserState>
   }
 }
+
+const UserModal: UserModalType = {
+  namespace: 'user',
+  state: {
+    username: null,
+    password: null
+  },
+  effects: {
+    *query({ payload }, { call, put }) {
+      return payload
+    }
+  },
+  reducers: {
+    save(state, action) {
+      return {
+        ...state,
+        ...action.payload
+      }
+    }
+  }
+}
+
+export default UserModal
